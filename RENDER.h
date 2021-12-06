@@ -10,7 +10,7 @@ using namespace std;
 class Render
 {
 
-	int WIDTH = 60, HEIGHT = 60;
+	int WIDTH = 60, HEIGHT = 50;
 
 	struct Point
 	{
@@ -141,17 +141,16 @@ public:
 		Cube origin;
 		int eye_x = 20;
 		int eye_y = 20;
-		int eye_z = 10;
+		int eye_z = 20;
 		float a = 0.0;
 		while(true)
 		{
-			//cube.rotY(a);
+			cube.rotY(a);
 			cube.project(eye_x, eye_y, eye_z);
 			for (int i = 0; i < HEIGHT; i++)
 			{
 				for (int j = 0; j < WIDTH; j++)
 				{
-					bool a = false;
 					for (auto plane : cube.Planes)
 					{
 						if (plane.position(i, j))
@@ -161,17 +160,21 @@ public:
 						}
 					}
 					cout << " ";
+					
 				nextPosition:
 					continue;
+					/*if(i == 0 || j  == 0 || i == HEIGHT - 1 || j == WIDTH - 1)
+						cout<<"#";
+					else cout<<" ";*/
 				}
 				cout << endl;
 			}
 			usleep(pow(10,5));
 			system("clear");
-			/*cube = origin;
+			cube = origin;
 			a += 0.1;
 			if (a > 2 * pi)
-				a -= 2 * pi;*/
+				a -= 2 * pi;
 		}
 	}
 };
